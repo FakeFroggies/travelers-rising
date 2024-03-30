@@ -11,8 +11,6 @@ public class PlayerMovement : MonoBehaviour
     public float jumpPower = 7f;
     public float gravity = 10f;
     public float defaultHeight = 2f;
-    public float crouchHeight = 1f;
-    public float crouchSpeed = 3f;
 
     private Vector3 moveDirection = Vector3.zero;
     private float rotationX = 0;
@@ -50,20 +48,6 @@ public class PlayerMovement : MonoBehaviour
         if (!characterController.isGrounded)
         {
             moveDirection.y -= gravity * Time.deltaTime;
-        }
-
-        if (Input.GetKey(KeyCode.R) && canMove)
-        {
-            characterController.height = crouchHeight;
-            walkSpeed = crouchSpeed;
-            runSpeed = crouchSpeed;
-
-        }
-        else
-        {
-            characterController.height = defaultHeight;
-            walkSpeed = 6f;
-            runSpeed = 12f;
         }
 
         characterController.Move(moveDirection * Time.deltaTime);

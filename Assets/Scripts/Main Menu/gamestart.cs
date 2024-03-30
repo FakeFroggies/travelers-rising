@@ -9,4 +9,14 @@ public class gamestart : MonoBehaviour
     {
         SceneManager.LoadScene(index);
     }
+
+    public void ExitApp()
+    {
+#if UNITY_EDITOR
+        UnityEditor.EditorApplication.isPlaying = false;
+#else
+        Application.Quit();
+#endif
+    }
 }
+

@@ -9,6 +9,7 @@ public class PlayerMovement : MonoBehaviour
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float gravity = 10f;
+    public float jumpPower = 10f;
     public float defaultHeight = 2f;
 
     private Vector3 moveDirection = Vector3.zero;
@@ -29,9 +30,18 @@ public class PlayerMovement : MonoBehaviour
         float curSpeedY = (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal");
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        if (!characterController.isGrounded)
+
+        if (Input.GetButton("Jump") && characterController.isGrounded)
+        {
+            moveDirection.y = jumpPower;
+        }
+        else
         {
             moveDirection.y = movementDirectionY;
+        }
+
+        if (!characterController.isGrounded)
+        {
             moveDirection.y -= gravity * Time.deltaTime;
         }
         characterController.Move(moveDirection * Time.deltaTime);

@@ -6,6 +6,7 @@ public class PlayerHealth : MonoBehaviour, Damageable
 {
     [SerializeField] private int maxHealth;
     [SerializeField] private HealthBar healthbar;
+    public GameObject objectToShow;
     public int health;
     public int Health 
     {
@@ -33,8 +34,8 @@ public class PlayerHealth : MonoBehaviour, Damageable
     }
     public void Die()
     {
-        Destroy(gameObject);
-        //сделать сцену геймовера
+        objectToShow.SetActive(true);
+        Time.timeScale = 0;
     }
 
     public void TakeDamage(int value)

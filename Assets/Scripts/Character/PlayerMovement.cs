@@ -30,7 +30,7 @@ public class PlayerMovement : MonoBehaviour
         float curSpeedY = (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal");
         float movementDirectionY = moveDirection.y;
         moveDirection = (forward * curSpeedX) + (right * curSpeedY);
-        if (Input.GetButton("Jump") && characterController.isGrounded)
+        if (Input.GetButtonDown("Jump") && characterController.isGrounded)
         {
             moveDirection.y = jumpPower;
         }

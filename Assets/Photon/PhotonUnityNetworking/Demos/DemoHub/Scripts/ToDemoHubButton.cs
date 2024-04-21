@@ -25,7 +25,8 @@ namespace Photon.Pun.Demo.Hub
 
 		CanvasGroup _canvasGroup;
 
-		public static ToDemoHubButton Instance
+        [System.Obsolete]
+        public static ToDemoHubButton Instance
 	    {
 	        get
 	        {
@@ -38,7 +39,8 @@ namespace Photon.Pun.Demo.Hub
 	        }
 	    }
 
-	    public void Awake()
+        [System.Obsolete]
+        public void Awake()
 	    {
 	        if (Instance != null && Instance != this)
 	        {

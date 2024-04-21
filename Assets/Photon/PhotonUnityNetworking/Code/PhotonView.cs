@@ -599,6 +599,7 @@ namespace Photon.Pun
         /// <param name="methodName">The name of a fitting method that was has the RPC attribute.</param>
         /// <param name="target">The group of targets and the way the RPC gets sent.</param>
         /// <param name="parameters">The parameters that the RPC method has (must fit this call!).</param>
+        [Obsolete]
         public void RPC(string methodName, RpcTarget target, params object[] parameters)
         {
             PhotonNetwork.RPC(this, methodName, target, false, parameters);
@@ -625,6 +626,7 @@ namespace Photon.Pun
         ///<param name="target">The group of targets and the way the RPC gets sent.</param>
         ///<param name="encrypt"> </param>
         ///<param name="parameters">The parameters that the RPC method has (must fit this call!).</param>
+        [Obsolete]
         public void RpcSecure(string methodName, RpcTarget target, bool encrypt, params object[] parameters)
         {
             PhotonNetwork.RPC(this, methodName, target, encrypt, parameters);
@@ -648,6 +650,7 @@ namespace Photon.Pun
         /// <param name="methodName">The name of a fitting method that was has the RPC attribute.</param>
         /// <param name="targetPlayer">The group of targets and the way the RPC gets sent.</param>
         /// <param name="parameters">The parameters that the RPC method has (must fit this call!).</param>
+        [Obsolete]
         public void RPC(string methodName, Player targetPlayer, params object[] parameters)
         {
             PhotonNetwork.RPC(this, methodName, targetPlayer, false, parameters);
@@ -672,6 +675,7 @@ namespace Photon.Pun
         ///<param name="targetPlayer">The group of targets and the way the RPC gets sent.</param>
         ///<param name="encrypt"> </param>
         ///<param name="parameters">The parameters that the RPC method has (must fit this call!).</param>
+        [Obsolete]
         public void RpcSecure(string methodName, Player targetPlayer, bool encrypt, params object[] parameters)
         {
             PhotonNetwork.RPC(this, methodName, targetPlayer, encrypt, parameters);

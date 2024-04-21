@@ -44,6 +44,7 @@ namespace Photon.Pun
             this.m_NetworkPosition = new Vector2();
         }
 
+        [System.Obsolete]
         public void FixedUpdate()
         {
             if (!this.photonView.IsMine)

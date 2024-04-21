@@ -67,6 +67,7 @@ namespace Photon.Pun
             m_firstTake = true;
         }
 
+        [System.Obsolete]
         void Update()
         {
             if (this.m_PhotonView == null || this.m_PhotonView.IsMine == true || PhotonNetwork.IsConnectedAndReady == false)
@@ -79,6 +80,7 @@ namespace Photon.Pun
             this.UpdateScale();
         }
 
+        [System.Obsolete]
         void UpdatePosition()
         {
             if (this.m_PositionModel.SynchronizeEnabled == false || this.m_ReceivedNetworkUpdate == false)
@@ -245,6 +247,7 @@ namespace Photon.Pun
         /// </summary>
         /// <param name="currentPosition">The current position.</param>
         /// <returns>The new position.</returns>
+        [System.Obsolete]
         public Vector3 UpdatePosition(Vector3 currentPosition)
         {
             Vector3 targetPosition = GetNetworkPosition() + GetExtrapolatedPositionOffset();
@@ -321,6 +324,7 @@ namespace Photon.Pun
         /// the time when the last position was received and the movement speed of the object
         /// </summary>
         /// <returns>Estimated position of the remote object</returns>
+        [System.Obsolete]
         public Vector3 GetExtrapolatedPositionOffset()
         {
             float timePassed = (float)(PhotonNetwork.Time - m_LastSerializeTime);

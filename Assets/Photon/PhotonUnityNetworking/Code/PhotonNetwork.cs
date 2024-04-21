@@ -593,6 +593,7 @@ namespace Photon.Pun
         ///
         /// A low framerate (as in Update calls) will affect sending of messages.
         /// </remarks>
+        [Obsolete]
         public static int SendRate
         {
             get
@@ -630,6 +631,7 @@ namespace Photon.Pun
         /// A lower rate takes up less performance but the receiving side needs to interpolate longer times
         /// between updates.
         /// </remarks>
+        [Obsolete]
         public static int SerializationRate
         {
             get
@@ -771,6 +773,7 @@ namespace Photon.Pun
         /// Make sure OnApplicationPause() gets the callbacks you expect on the platform you target!
         /// Check PhotonHandler.OnApplicationPause(bool pause) to see the implementation.
         /// </remarks>
+        [Obsolete]
         public static float KeepAliveInBackground
         {
             set
@@ -1043,7 +1046,8 @@ namespace Photon.Pun
 
         #if UNITY_EDITOR && UNITY_2019_4_OR_NEWER
         [RuntimeInitializeOnLoadMethod(RuntimeInitializeLoadType.AfterAssembliesLoaded)]
-        #endif
+        [Obsolete]
+#endif
         private static void StaticReset()
         {
             #if UNITY_EDITOR
@@ -2916,6 +2920,7 @@ namespace Photon.Pun
         /// <summary>
         /// Internal to send an RPC on given PhotonView. Do not call this directly but use: PhotonView.RPC!
         /// </summary>
+        [Obsolete]
         internal static void RPC(PhotonView view, string methodName, RpcTarget target, bool encrypt, params object[] parameters)
         {
             if (string.IsNullOrEmpty(methodName))
@@ -2948,6 +2953,7 @@ namespace Photon.Pun
         /// <summary>
         /// Internal to send an RPC on given PhotonView. Do not call this directly but use: PhotonView.RPC!
         /// </summary>
+        [Obsolete]
         internal static void RPC(PhotonView view, string methodName, Player targetPlayer, bool encrypt, params object[] parameters)
         {
             if (!VerifyCanUseNetwork())
@@ -2980,6 +2986,7 @@ namespace Photon.Pun
         /// <summary>Finds the GameObjects with Components of a specific type (using FindObjectsOfType).</summary>
         /// <param name="type">Type must be a Component</param>
         /// <returns>HashSet with GameObjects that have a specific type of Component.</returns>
+        [Obsolete]
         public static HashSet<GameObject> FindGameObjectsWithComponent(Type type)
         {
             HashSet<GameObject> objectsWithComponent = new HashSet<GameObject>();
@@ -3287,6 +3294,7 @@ namespace Photon.Pun
         /// Internally used by Editor scripts, called on Hierarchy change (includes scene save) to remove surplus hidden PhotonHandlers.
         /// </summary>
         /// <remarks>This is done in this class, because the Editor assembly can't access PhotonHandler.</remarks>
+        [Obsolete]
         public static void InternalCleanPhotonMonoFromSceneIfStuck()
         {
             PhotonHandler[] photonHandlers = GameObject.FindObjectsOfType(typeof(PhotonHandler)) as PhotonHandler[];

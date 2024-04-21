@@ -51,6 +51,7 @@ namespace Photon.Pun.UtilityScripts
         /// <summary>
         ///     Gets references to the PhotonView component and the cull area game object.
         /// </summary>
+        [System.Obsolete]
         private void OnEnable()
         {
             if (this.pView == null)

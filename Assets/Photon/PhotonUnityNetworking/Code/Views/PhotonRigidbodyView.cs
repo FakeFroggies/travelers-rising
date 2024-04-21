@@ -45,6 +45,7 @@ namespace Photon.Pun
             this.m_NetworkRotation = new Quaternion();
         }
 
+        [System.Obsolete]
         public void FixedUpdate()
         {
             if (!this.photonView.IsMine)

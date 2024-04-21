@@ -59,6 +59,7 @@ namespace Photon.Pun.Demo.Procedural
 
         private static WorldGenerator instance;
 
+        [System.Obsolete]
         public static WorldGenerator Instance
         {
             get

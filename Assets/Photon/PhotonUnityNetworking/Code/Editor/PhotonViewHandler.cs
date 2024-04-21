@@ -169,6 +169,8 @@ namespace Photon.Pun
         public Dictionary<int, PhotonView> Views = new Dictionary<int, PhotonView>();
 
         private static PunSceneViews instanceField;
+
+        [System.Obsolete]
         public static PunSceneViews Instance
         {
             get

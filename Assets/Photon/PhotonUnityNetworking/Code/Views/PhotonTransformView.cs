@@ -54,6 +54,7 @@ namespace Photon.Pun
             m_firstTake = true;
         }
 
+        [System.Obsolete]
         public void Update()
         {
             var tr = transform;

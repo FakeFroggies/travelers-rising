@@ -70,6 +70,8 @@ namespace Photon.Pun.UtilityScripts
         public static event Action<Player, PhotonTeam> PlayerLeftTeam;
 
         private static PhotonTeamsManager instance;
+
+        [Obsolete]
         public static PhotonTeamsManager Instance
         {
             get
@@ -133,6 +135,7 @@ namespace Photon.Pun.UtilityScripts
 
         #region IMatchmakingCallbacks
 
+        [Obsolete]
         void IMatchmakingCallbacks.OnJoinedRoom()
         {
             this.UpdateTeams();
@@ -143,6 +146,7 @@ namespace Photon.Pun.UtilityScripts
             this.ClearTeams();
         }
 
+        [Obsolete]
         void IInRoomCallbacks.OnPlayerPropertiesUpdate(Player targetPlayer, Hashtable changedProps)
         {
             object temp;
@@ -200,6 +204,7 @@ namespace Photon.Pun.UtilityScripts
             }
         }
 
+        [Obsolete]
         void IInRoomCallbacks.OnPlayerLeftRoom(Player otherPlayer)
         {
             if (otherPlayer.IsInactive)
@@ -215,6 +220,7 @@ namespace Photon.Pun.UtilityScripts
             }
         }
 
+        [Obsolete]
         void IInRoomCallbacks.OnPlayerEnteredRoom(Player newPlayer)
         {
             PhotonTeam team = newPlayer.GetPhotonTeam();
@@ -247,6 +253,7 @@ namespace Photon.Pun.UtilityScripts
 
         #region Private methods
 
+        [Obsolete]
         private void UpdateTeams()
         {
             this.ClearTeams();
@@ -371,6 +378,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player whose team mates will be searched.</param>
         /// <param name="teamMates">The array of players to be filled.</param>
         /// <returns>If successful or not.</returns>
+        [Obsolete]
         public bool TryGetTeamMatesOfPlayer(Player player, out Player[] teamMates)
         {
             teamMates = null;
@@ -493,6 +501,7 @@ namespace Photon.Pun.UtilityScripts
     {
         /// <summary>Gets the team the player is currently joined to. Null if none.</summary>
         /// <returns>The team the player is currently joined to. Null if none.</returns>
+        [Obsolete]
         public static PhotonTeam GetPhotonTeam(this Player player)
         {
             object teamId;
@@ -510,6 +519,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player who will join a team.</param>
         /// <param name="team">The team to be joined.</param>
         /// <returns></returns>
+        [Obsolete]
         public static bool JoinTeam(this Player player, PhotonTeam team)
         {
             if (team == null)
@@ -532,6 +542,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player who will join the team.</param>
         /// <param name="teamCode">The code fo the team to be joined.</param>
         /// <returns></returns>
+        [Obsolete]
         public static bool JoinTeam(this Player player, byte teamCode)
         {
             PhotonTeam team;
@@ -544,6 +555,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player who will join the team.</param>
         /// <param name="teamName">The name of the team to be joined.</param>
         /// <returns></returns>
+        [Obsolete]
         public static bool JoinTeam(this Player player, string teamName)
         {
             PhotonTeam team;
@@ -554,6 +566,7 @@ namespace Photon.Pun.UtilityScripts
         /// <remarks>Internally checks if this player is in that team already or not. Only team switches are actually sent.</remarks>
         /// <param name="player"></param>
         /// <param name="team"></param>
+        [Obsolete]
         public static bool SwitchTeam(this Player player, PhotonTeam team)
         {
             if (team == null)
@@ -581,6 +594,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player that will switch teams.</param>
         /// <param name="teamCode">The code of the team to switch to.</param>
         /// <returns>If the team switch request is queued to be sent to the server or done in case offline or not joined to a room yet.</returns>
+        [Obsolete]
         public static bool SwitchTeam(this Player player, byte teamCode)
         {
             PhotonTeam team;
@@ -592,6 +606,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player that will switch teams.</param>
         /// <param name="teamName">The name of the team to switch to.</param>
         /// <returns>If the team switch request is queued to be sent to the server or done in case offline or not joined to a room yet.</returns>
+        [Obsolete]
         public static bool SwitchTeam(this Player player, string teamName)
         {
             PhotonTeam team;
@@ -603,6 +618,7 @@ namespace Photon.Pun.UtilityScripts
         /// </summary>
         /// <param name="player"></param>
         /// <returns>If the leaving team request is queued to be sent to the server or done in case offline or not joined to a room yet.</returns>
+        [Obsolete]
         public static bool LeaveCurrentTeam(this Player player)
         {
             PhotonTeam currentTeam = player.GetPhotonTeam();
@@ -620,6 +636,7 @@ namespace Photon.Pun.UtilityScripts
         /// <param name="player">The player to get the team mates of.</param>
         /// <param name="teamMates">The team mates array to fill.</param>
         /// <returns>If successful or not.</returns>
+        [Obsolete]
         public static bool TryGetTeamMates(this Player player, out Player[] teamMates)
         {
             return PhotonTeamsManager.Instance.TryGetTeamMatesOfPlayer(player, out teamMates);

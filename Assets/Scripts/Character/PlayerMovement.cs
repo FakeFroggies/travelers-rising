@@ -15,7 +15,8 @@ public class PlayerMovement : MonoBehaviour
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
-    private LookDirection direction = new LookDirection();
+    private Vector3 direction;
+    private float minX, maxX, minZ, maxZ;
     //Joystick
     [SerializeField] private InputActionReference moveActions;
     void Start()
@@ -36,16 +37,39 @@ public class PlayerMovement : MonoBehaviour
         Vector3 forward = transform.TransformDirection(Vector3.forward);
         Vector3 right = transform.TransformDirection(Vector3.right);
 
+        //Looking direction
         direction = GetLookingPosition();
-        Debug.Log(direction.right + ":" + direction.forward);
-        //Debug.Log(Input.GetAxis("Vertical") + "|" + Input.GetAxis("Horizontal"));
+        direction.x *= -1;
+
+        //Get range for up-down speed
+        if (Input.GetAxis("Vertical") < 0)
+        {
+            minX = -1f;
+            maxX = -0.5f;
+        }
+        else
+        {
+            minX = 0.5f;
+            maxX = 1f;
+        }
+        //Get range for left-right speed
+        if (Input.GetAxis("Horizontal") < 0)
+        {
+            minZ = -1f;
+            maxZ = -0.5f;
+        }
+        else
+        {
+            minZ = 0.5f;
+            maxZ = 1f;
+        }
 
         //Get speed
         bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Vertical");
-        float curSpeedY = (isRunning ? runSpeed : walkSpeed) * Input.GetAxis("Horizontal");
+        float curSpeedX = (isRunning ? runSpeed : walkSpeed) * Math.Abs(Input.GetAxis("Vertical")) * Math.Clamp(Input.GetAxis("Vertical") - direction.x, minX, maxX);
+        float curSpeedZ = (isRunning ? runSpeed : walkSpeed) * Math.Abs(Input.GetAxis("Horizontal")) * Math.Clamp(Input.GetAxis("Horizontal") - direction.z, minZ, maxZ);
         float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedY);
+        moveDirection = (forward * curSpeedX) + (right * curSpeedZ);
 
         //Jumping
         if (Input.GetButtonDown("Jump") && characterController.isGrounded)
@@ -67,7 +91,7 @@ public class PlayerMovement : MonoBehaviour
         characterController.Move(moveDirection * Time.deltaTime);
     }
 
-    private LookDirection GetLookingPosition()
+    private Vector3 GetLookingPosition()
     {
         //Looking direction
         var ray = Camera.main.ScreenPointToRay(Input.mousePosition);
@@ -75,40 +99,9 @@ public class PlayerMovement : MonoBehaviour
         {
             // The Raycast hit something, return with the position.
             var point = hitInfo.point;
-            point.x -= transform.position.x;
-            point.z -= transform.position.z;
-            //Debug.Log(point);
-            direction.right = point.x - point.z;
-            if (point.x < 0 && point.z < 0)
-                direction.forward = point.x / Math.Abs(point.z);
-            else
-                direction.forward = point.x / point.z;
-            //if (point.x > 0 && point.z > 0)
-            //{
-            //    //Debug.Log("Up");
-            //    return 2;
-            //}
-            //else if (point.x < 0 && point.z < 0)
-            //{
-            //    //Debug.Log("Down");
-            //    return -2;
-            //}
-            //else
-            //    switch (point.x - point.z)
-            //    {
-            //        case > 0:
-            //            //Debug.Log("Right");
-            //            return 1;
-            //        case < 0:
-            //            //Debug.Log("Left");
-            //            return -1;
-
-            //    }
+            point -= transform.position;
+            return Quaternion.Euler(new Vector3(0, 45, 0)) * point.normalized;
         }
-        return direction;
-    }
-    class LookDirection
-    {
-        public float right, forward;
+        return new(0, 0, 0);
     }
 }

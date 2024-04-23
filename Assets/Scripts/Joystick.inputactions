@@ -1,0 +1,34 @@
+{
+    "name": "Joystick",
+    "maps": [
+        {
+            "name": "Player",
+            "id": "81cd1eac-e581-472a-9530-a27b59266168",
+            "actions": [
+                {
+                    "name": "Move",
+                    "type": "Value",
+                    "id": "c30a6311-5719-4c5a-af94-9dec81211a1d",
+                    "expectedControlType": "Vector3",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": true
+                }
+            ],
+            "bindings": [
+                {
+                    "name": "",
+                    "id": "f4dab10e-a3e5-44c1-885f-ed35172c6169",
+                    "path": "<Gamepad>/leftStick",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Move",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                }
+            ]
+        }
+    ],
+    "controlSchemes": []
+}

@@ -549,6 +549,7 @@ namespace Pinwheel.Poseidon
             GenerateMesh();
         }
 
+        [System.Obsolete]
         private void OnEnable()
         {
             Camera.onPreCull += OnPreCullCamera;
@@ -576,6 +577,7 @@ namespace Pinwheel.Poseidon
             timer.Start();
         }
 
+        [System.Obsolete]
         private void OnDisable()
         {
             Camera.onPreCull -= OnPreCullCamera;
@@ -1222,6 +1224,7 @@ namespace Pinwheel.Poseidon
         }
 
 #if POSEIDON_URP
+        [System.Obsolete]
         private void OnBeginCameraRenderingSRP(ScriptableRenderContext context, Camera cam)
         {
             ValidateMaterial();
@@ -1249,6 +1252,7 @@ namespace Pinwheel.Poseidon
             }
         }
 
+        [System.Obsolete]
         private void RenderReflectionTextureSRP(ScriptableRenderContext context, Camera cam)
         {
             if (MeshType == PWaterMeshType.Spline)

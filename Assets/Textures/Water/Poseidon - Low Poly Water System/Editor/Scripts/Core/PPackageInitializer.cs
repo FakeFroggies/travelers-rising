@@ -21,6 +21,7 @@ namespace Pinwheel.Poseidon
 #pragma warning restore 0414
 
         [DidReloadScripts]
+        [Obsolete]
         public static void Init()
         {
             isUrpInstalled = false;
@@ -29,12 +30,14 @@ namespace Pinwheel.Poseidon
             CheckUnityPackagesAndInit();
         }
 
+        [Obsolete]
         private static void CheckUnityPackagesAndInit()
         {
             listPackageRequest = Client.List(true);
             EditorApplication.update += OnRequestingPackageList;
         }
 
+        [Obsolete]
         private static void OnRequestingPackageList()
         {
             if (listPackageRequest == null)
@@ -66,6 +69,7 @@ namespace Pinwheel.Poseidon
             InitPackage();
         }
 
+        [Obsolete]
         private static void InitPackage()
         {
             BuildTarget buildTarget = EditorUserBuildSettings.activeBuildTarget;

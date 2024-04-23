@@ -61,6 +61,7 @@ namespace Pinwheel.Poseidon
         }
 
         [MenuItem("Window/Poseidon/Project/Update Dependencies")]
+        [System.Obsolete]
         public static void UpdateDependencies()
         {
             PPackageInitializer.Init();

@@ -118,6 +118,7 @@ namespace Photon.Chat.Demo
                 "\t<color=#E07B00>\\clear</color>";
 
 
+        [System.Obsolete]
         public void Start()
         {
             DontDestroyOnLoad(this.gameObject);
@@ -150,6 +151,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void Connect()
         {
             this.UserIdFormPanel.gameObject.SetActive(false);
@@ -168,6 +170,7 @@ namespace Photon.Chat.Demo
         }
 
         /// <summary>To avoid that the Editor becomes unresponsive, disconnect all Photon connections in OnDestroy.</summary>
+        [System.Obsolete]
         public void OnDestroy()
         {
             if (this.chatClient != null)
@@ -177,6 +180,7 @@ namespace Photon.Chat.Demo
         }
 
         /// <summary>To avoid that the Editor becomes unresponsive, disconnect all Photon connections in OnApplicationQuit.</summary>
+        [System.Obsolete]
         public void OnApplicationQuit()
         {
             if (this.chatClient != null)
@@ -185,6 +189,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void Update()
         {
             if (this.chatClient != null)
@@ -203,6 +208,7 @@ namespace Photon.Chat.Demo
         }
 
 
+        [System.Obsolete]
         public void OnEnterSend()
         {
             if (Input.GetKey(KeyCode.Return) || Input.GetKey(KeyCode.KeypadEnter))
@@ -212,6 +218,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void OnClickSend()
         {
             if (this.InputFieldChat != null)
@@ -225,6 +232,7 @@ namespace Photon.Chat.Demo
         public int TestLength = 2048;
         private byte[] testBytes = new byte[2048];
 
+        [System.Obsolete]
         private void SendChatMessage(string inputLine)
         {
             if (string.IsNullOrEmpty(inputLine))
@@ -357,11 +365,13 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void PostHelpToCurrentChannel()
         {
             this.CurrentChannelText.text += HelpText;
         }
 
+        [System.Obsolete]
         public void DebugReturn(ExitGames.Client.Photon.DebugLevel level, string message)
         {
             if (level == ExitGames.Client.Photon.DebugLevel.ERROR)
@@ -378,6 +388,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void OnConnected()
         {
             if (this.ChannelsToJoinOnConnect != null && this.ChannelsToJoinOnConnect.Length > 0)
@@ -416,12 +427,14 @@ namespace Photon.Chat.Demo
             this.chatClient.SetOnlineStatus(ChatUserStatus.Online); // You can set your online state (without a mesage).
         }
 
+        [System.Obsolete]
         public void OnDisconnected()
         {
             Debug.Log("OnDisconnected()");
             this.ConnectingLabel.SetActive(false);
         }
 
+        [System.Obsolete]
         public void OnChatStateChange(ChatState state)
         {
             // use OnConnected() and OnDisconnected()
@@ -430,6 +443,7 @@ namespace Photon.Chat.Demo
             this.StateText.text = state.ToString();
         }
 
+        [System.Obsolete]
         public void OnSubscribed(string[] channels, bool[] results)
         {
             // in this demo, we simply send a message into each channel. This is NOT a must have!
@@ -471,11 +485,13 @@ namespace Photon.Chat.Demo
         }
 
         /// <inheritdoc />
+        [System.Obsolete]
         public void OnSubscribed(string channel, string[] users, Dictionary<object, object> properties)
         {
             Debug.LogFormat("OnSubscribed: {0}, users.Count: {1} Channel-props: {2}.", channel, users.Length, properties.ToStringFull());
         }
 
+        [System.Obsolete]
         private void InstantiateChannelButton(string channelName)
         {
             if (this.channelToggles.ContainsKey(channelName))
@@ -492,6 +508,7 @@ namespace Photon.Chat.Demo
             this.channelToggles.Add(channelName, cbtn);
         }
 
+        [System.Obsolete]
         private void InstantiateFriendButton(string friendId)
         {
             GameObject fbtn = (GameObject)Instantiate(this.FriendListUiItemtoInstantiate);
@@ -506,6 +523,7 @@ namespace Photon.Chat.Demo
         }
 
 
+        [System.Obsolete]
         public void OnUnsubscribed(string[] channels)
         {
             foreach (string channelName in channels)
@@ -537,6 +555,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void OnGetMessages(string channelName, string[] senders, object[] messages)
         {
             if (channelName.Equals(this.selectedChannelName))
@@ -546,6 +565,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void OnPrivateMessage(string sender, object message, string channelName)
         {
             // as the ChatClient is buffering the messages for you, this GUI doesn't need to do anything here
@@ -571,6 +591,7 @@ namespace Photon.Chat.Demo
         /// <param name="gotMessage">True if the status contains a message you should cache locally. False: This status update does not include a
         /// message (keep any you have).</param>
         /// <param name="message">Message that user set.</param>
+        [System.Obsolete]
         public void OnStatusUpdate(string user, int status, bool gotMessage, object message)
         {
 
@@ -583,33 +604,39 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void OnUserSubscribed(string channel, string user)
         {
             Debug.LogFormat("OnUserSubscribed: channel=\"{0}\" userId=\"{1}\"", channel, user);
         }
 
+        [System.Obsolete]
         public void OnUserUnsubscribed(string channel, string user)
         {
             Debug.LogFormat("OnUserUnsubscribed: channel=\"{0}\" userId=\"{1}\"", channel, user);
         }
 
         /// <inheritdoc />
+        [System.Obsolete]
         public void OnChannelPropertiesChanged(string channel, string userId, Dictionary<object, object> properties)
         {
             Debug.LogFormat("OnChannelPropertiesChanged: {0} by {1}. Props: {2}.", channel, userId, Extensions.ToStringFull(properties));
         }
 
+        [System.Obsolete]
         public void OnUserPropertiesChanged(string channel, string targetUserId, string senderUserId, Dictionary<object, object> properties)
         {
             Debug.LogFormat("OnUserPropertiesChanged: (channel:{0} user:{1}) by {2}. Props: {3}.", channel, targetUserId, senderUserId, Extensions.ToStringFull(properties));
         }
 
         /// <inheritdoc />
+        [System.Obsolete]
         public void OnErrorInfo(string channel, string error, object data)
         {
             Debug.LogFormat("OnErrorInfo for channel {0}. Error: {1} Data: {2}", channel, error, data);
         }
 
+        [System.Obsolete]
         public void AddMessageToSelectedChannel(string msg)
         {
             ChatChannel channel = null;
@@ -628,6 +655,7 @@ namespace Photon.Chat.Demo
 
 
 
+        [System.Obsolete]
         public void ShowChannel(string channelName)
         {
             if (string.IsNullOrEmpty(channelName))
@@ -653,6 +681,7 @@ namespace Photon.Chat.Demo
             }
         }
 
+        [System.Obsolete]
         public void OpenDashboard()
         {
             Application.OpenURL("https://dashboard.photonengine.com");

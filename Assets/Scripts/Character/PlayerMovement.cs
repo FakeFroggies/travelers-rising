@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using Photon.Pun;
 
 [RequireComponent(typeof(CharacterController))]
 public class PlayerMovement : MonoBehaviour
@@ -12,6 +13,7 @@ public class PlayerMovement : MonoBehaviour
     public float gravity = 10f;
     public float jumpPower = 10f;
     public float defaultHeight = 2f;
+    PhotonView view;
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
@@ -22,73 +24,77 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        view = GetComponent<PhotonView>();
     }
 
     void Update()
     {
-        //Joystick
-        Vector2 move = moveActions.action.ReadValue<Vector2>();
-        Vector3 correctMove = new(move.x, 0, move.y);
-        correctMove = correctMove.x * Camera.main.transform.right + correctMove.z * Camera.main.transform.forward;
-        correctMove.y = 0;
-        characterController.Move(runSpeed * Time.deltaTime * correctMove);
-
-        //Move direction
-        Vector3 forward = transform.TransformDirection(Vector3.forward);
-        Vector3 right = transform.TransformDirection(Vector3.right);
-
-        //Looking direction
-        direction = GetLookingPosition();
-        direction.x *= -1;
-
-        //Get range for up-down speed
-        if (Input.GetAxis("Vertical") < 0)
+        if (view.IsMine)
         {
-            minX = -1f;
-            maxX = -0.5f;
-        }
-        else
-        {
-            minX = 0.5f;
-            maxX = 1f;
-        }
-        //Get range for left-right speed
-        if (Input.GetAxis("Horizontal") < 0)
-        {
-            minZ = -1f;
-            maxZ = -0.5f;
-        }
-        else
-        {
-            minZ = 0.5f;
-            maxZ = 1f;
-        }
+            //Joystick
+            Vector2 move = moveActions.action.ReadValue<Vector2>();
+            Vector3 correctMove = new(move.x, 0, move.y);
+            correctMove = correctMove.x * Camera.main.transform.right + correctMove.z * Camera.main.transform.forward;
+            correctMove.y = 0;
+            characterController.Move(runSpeed * Time.deltaTime * correctMove);
 
-        //Get speed
-        bool isRunning = Input.GetKey(KeyCode.LeftShift);
-        float curSpeedX = (isRunning ? runSpeed : walkSpeed) * Math.Abs(Input.GetAxis("Vertical")) * Math.Clamp(Input.GetAxis("Vertical") - direction.x, minX, maxX);
-        float curSpeedZ = (isRunning ? runSpeed : walkSpeed) * Math.Abs(Input.GetAxis("Horizontal")) * Math.Clamp(Input.GetAxis("Horizontal") - direction.z, minZ, maxZ);
-        float movementDirectionY = moveDirection.y;
-        moveDirection = (forward * curSpeedX) + (right * curSpeedZ);
+            //Move direction
+            Vector3 forward = transform.TransformDirection(Vector3.forward);
+            Vector3 right = transform.TransformDirection(Vector3.right);
 
-        //Jumping
-        if (Input.GetButtonDown("Jump") && characterController.isGrounded)
-        {
-            moveDirection.y = jumpPower;
-        }
-        else
-        {
-            moveDirection.y = movementDirectionY;
-        }
+            //Looking direction
+            direction = GetLookingPosition();
+            direction.x *= -1;
 
-        //Gravity
-        if (!characterController.isGrounded)
-        {
-            moveDirection.y -= gravity * Time.deltaTime;
-        }
+            //Get range for up-down speed
+            if (Input.GetAxis("Vertical") < 0)
+            {
+                minX = -1f;
+                maxX = -0.5f;
+            }
+            else
+            {
+                minX = 0.5f;
+                maxX = 1f;
+            }
+            //Get range for left-right speed
+            if (Input.GetAxis("Horizontal") < 0)
+            {
+                minZ = -1f;
+                maxZ = -0.5f;
+            }
+            else
+            {
+                minZ = 0.5f;
+                maxZ = 1f;
+            }
 
-        //Move
-        characterController.Move(moveDirection * Time.deltaTime);
+            //Get speed
+            bool isRunning = Input.GetKey(KeyCode.LeftShift);
+            float curSpeedX = (isRunning ? runSpeed : walkSpeed) * Math.Abs(Input.GetAxis("Vertical")) * Math.Clamp(Input.GetAxis("Vertical") - direction.x, minX, maxX);
+            float curSpeedZ = (isRunning ? runSpeed : walkSpeed) * Math.Abs(Input.GetAxis("Horizontal")) * Math.Clamp(Input.GetAxis("Horizontal") - direction.z, minZ, maxZ);
+            float movementDirectionY = moveDirection.y;
+            moveDirection = (forward * curSpeedX) + (right * curSpeedZ);
+
+            //Jumping
+            if (Input.GetButtonDown("Jump") && characterController.isGrounded)
+            {
+                moveDirection.y = jumpPower;
+            }
+            else
+            {
+                moveDirection.y = movementDirectionY;
+            }
+
+            //Gravity
+            if (!characterController.isGrounded)
+            {
+                moveDirection.y -= gravity * Time.deltaTime;
+            }
+
+            //Move
+            characterController.Move(moveDirection * Time.deltaTime);
+        }
     }
 
     private Vector3 GetLookingPosition()

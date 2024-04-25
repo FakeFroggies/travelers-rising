@@ -3,16 +3,17 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
-
+using Photon.Pun;
 
 [RequireComponent(typeof(CharacterController))]
-public class PlayerMovement : MonoBehaviour
+public class PlayerMovementMP : MonoBehaviour
 {
     public float walkSpeed = 6f;
     public float runSpeed = 12f;
     public float gravity = 10f;
     public float jumpPower = 10f;
     public float defaultHeight = 2f;
+    PhotonView view;
 
     private Vector3 moveDirection = Vector3.zero;
     private CharacterController characterController;
@@ -23,10 +24,13 @@ public class PlayerMovement : MonoBehaviour
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        view = GetComponent<PhotonView>();
     }
 
     void Update()
     {
+        if (view.IsMine)
+        {
             //Joystick
             Vector2 move = moveActions.action.ReadValue<Vector2>();
             Vector3 correctMove = new(move.x, 0, move.y);
@@ -90,6 +94,7 @@ public class PlayerMovement : MonoBehaviour
 
             //Move
             characterController.Move(moveDirection * Time.deltaTime);
+        }
     }
 
     private Vector3 GetLookingPosition()

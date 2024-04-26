@@ -482,7 +482,6 @@ GameObject:
   m_Component:
   - component: {fileID: 322136283}
   - component: {fileID: 322136282}
-  - component: {fileID: 322136281}
   - component: {fileID: 322136284}
   m_Layer: 0
   m_Name: Main Camera
@@ -491,14 +490,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!81 &322136281
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 322136280}
-  m_Enabled: 1
 --- !u!20 &322136282
 Camera:
   m_ObjectHideFlags: 0
@@ -1962,6 +1953,18 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+      - m_Target: {fileID: 807856494}
+        m_TargetAssemblyTypeName: GameVolume, Assembly-CSharp
+        m_MethodName: SaveSound
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: SaveSound
+          m_BoolArgument: 0
+        m_CallState: 1
 --- !u!114 &646949978
 MonoBehaviour:
   m_ObjectHideFlags: 0

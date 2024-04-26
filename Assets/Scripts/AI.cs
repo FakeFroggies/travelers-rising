@@ -76,4 +76,19 @@ public class AdvancedAI : MonoBehaviour
     {
         Debug.Log("Attacking the target!");
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Camera.main.GetComponent<Drugs>().onDrugs = true;
+        }
+    }
+    private void OnTriggerExit(Collider other)
+    {
+        if (other.tag == "Player")
+        {
+            Camera.main.GetComponent<Drugs>().onDrugs = false;
+        }
+    }
 }

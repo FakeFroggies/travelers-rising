@@ -8,7 +8,7 @@ public class AdvancedAI : MonoBehaviour
     private int currentPatrolPointIndex = 0;
     public float moveSpeed = 3.0f;
 
-    public Transform target;
+    public GameObject target;
     public float chaseRange = 10.0f;
     public float attackRange = 2.0f;
     public float attackRate = 1.0f;
@@ -25,7 +25,7 @@ public class AdvancedAI : MonoBehaviour
     void Update()
     {
 
-        float distanceToTarget = Vector3.Distance(transform.position, target.position);
+        float distanceToTarget = Vector3.Distance(transform.position, target.transform.position);
 
         if (distanceToTarget <= attackRange)
         {
@@ -68,13 +68,13 @@ public class AdvancedAI : MonoBehaviour
     {
         if (target != null)
         {
-            transform.position = Vector3.MoveTowards(transform.position, target.position, moveSpeed * Time.deltaTime);
+            transform.position = Vector3.MoveTowards(transform.position, target.transform.position, moveSpeed * Time.deltaTime);
         }
     }
 
     void Attack()
     {
-        Debug.Log("Attacking the target!");
+        target.GetComponent<PlayerHealth>().TakeDamage(10);
     }
 
     private void OnTriggerEnter(Collider other)

@@ -4,19 +4,18 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
-public class RandomGeneration : MonoBehaviour
+public class RandomGeneration_LL : MonoBehaviour
 {
     public Room[] RoomPrefabs;
     public Room StartingRoom;
-
     private Room[,] spawnedRooms;
 
     private void Start()
     {
-        spawnedRooms = new Room[11, 11];
+        spawnedRooms = new Room[5, 5];
         spawnedRooms[0, 0] = StartingRoom;
 
-        for (int i = 0; i < 12; i++)
+        for (int i = 0; i < 6; i++)
         {
             PlaceOneRoom();
         }
@@ -25,9 +24,11 @@ public class RandomGeneration : MonoBehaviour
     private void PlaceOneRoom()
     {
         HashSet<Vector2Int> vacantPlaces = new HashSet<Vector2Int>();
+        Room newRoom = Instantiate(RoomPrefabs[Random.Range(0, RoomPrefabs.Length)]);
         for (int x = 0; x < spawnedRooms.GetLength(0); x++)
         {
-            for (int y = 0; y < spawnedRooms.GetLength(1); y++)
+            
+                for (int y = 0; y < spawnedRooms.GetLength(1); y++)
             {
                 if (spawnedRooms[x, y] == null) continue;
 
@@ -39,14 +40,13 @@ public class RandomGeneration : MonoBehaviour
                 if (x < maxX && spawnedRooms[x + 1, y] == null) vacantPlaces.Add(new Vector2Int(x + 1, y));
                 if (y < maxY && spawnedRooms[x, y + 1] == null) vacantPlaces.Add(new Vector2Int(x, y + 1));
             }
-        }
+            }
 
-        Room newRoom = Instantiate(RoomPrefabs[Random.Range(0, RoomPrefabs.Length)]);
-
-        int limit = 500;
+        int limit = 1000;
         while (limit-- > 0)
         {
             Vector2Int position = vacantPlaces.ElementAt(Random.Range(0, vacantPlaces.Count));
+            newRoom.RotateRandomly();
 
             if (ConnectToSomething(newRoom, position))
             {
@@ -55,8 +55,8 @@ public class RandomGeneration : MonoBehaviour
                 return;
             }
         }
-
         Destroy(newRoom.gameObject);
+        PlaceOneRoom();
     }
 
     private bool ConnectToSomething(Room room, Vector2Int p)
